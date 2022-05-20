@@ -11,5 +11,8 @@ module.exports = (phase) => {
     },
     swcMinify: isEnvProduction,
     poweredByHeader: false,
+    experimental: {
+      emotion: true,
+    },
   };
 };
