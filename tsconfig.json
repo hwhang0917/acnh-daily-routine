@@ -18,6 +18,7 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"],
+      "@hooks/*": ["hooks/*"],
       "@constants": ["constants/index"],
       "@interfaces": ["interfaces/index"]
     }

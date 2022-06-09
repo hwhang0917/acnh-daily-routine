@@ -1,13 +1,8 @@
-import React from "react";
-import type {
-  GetServerSideProps,
-  GetServerSidePropsResult,
-  NextPage,
-} from "next";
-import { IMusic, IRawMusic } from "@interfaces";
-import useTime from "hooks/useTime";
+import type { GetServerSideProps, NextPage } from "next";
 import { css } from "@emotion/react";
+import { IMusic, IRawMusic } from "@interfaces";
 import { ACNH_API } from "@constants";
+import Blob from "@components/Blob.component";
 
 interface IProps {
   hourMusic: IMusic[];
@@ -39,8 +34,6 @@ export const getServerSideProps: GetServerSideProps<IProps> = async () => {
 };
 
 const Home: NextPage<IProps> = ({ hourMusic }) => {
-  const date = useTime();
-
   return (
     <main
       css={css`
@@ -48,11 +41,10 @@ const Home: NextPage<IProps> = ({ hourMusic }) => {
         place-content: center;
         width: 100%;
         height: 100vh;
+        background-color: #3498db;
       `}
     >
-      {hourMusic.map(({ id, fileName }) => (
-        <h1 key={id}>{fileName}</h1>
-      ))}
+      <Blob />
     </main>
   );
 };
