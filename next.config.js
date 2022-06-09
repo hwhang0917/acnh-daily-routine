@@ -8,6 +8,7 @@ module.exports = (phase) => {
     reactStrictMode: true,
     compiler: {
       removeConsole: isEnvProduction,
+      styledComponents: true,
     },
     swcMinify: isEnvProduction,
     poweredByHeader: false,

@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { IMusic, IRawMusic } from "@interfaces";
 import { ACNH_API } from "@constants";
 import Blob from "@components/Blob.component";
+import { useGeolocation } from "@hooks/useGeolocation";
 
 interface IProps {
   hourMusic: IMusic[];
@@ -34,6 +35,9 @@ export const getServerSideProps: GetServerSideProps<IProps> = async () => {
 };
 
 const Home: NextPage<IProps> = ({ hourMusic }) => {
+  const { coords, error } = useGeolocation();
+
+  console.log(coords);
   return (
     <main
       css={css`
@@ -42,6 +46,7 @@ const Home: NextPage<IProps> = ({ hourMusic }) => {
         width: 100%;
         height: 100vh;
         background-color: #3498db;
+        overflow: hidden;
       `}
     >
       <Blob />

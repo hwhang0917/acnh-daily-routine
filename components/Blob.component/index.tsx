@@ -21,8 +21,8 @@ const Blob = () => {
   return (
     <div
       css={css`
-        width: 500px;
-        height: 500px;
+        width: 30vh;
+        height: 30vh;
         border-radius: ${getPercentString(borderRadius.first)} /
           ${getPercentString(borderRadius.second)};
         background: rgba(236, 240, 241, 0.8);
