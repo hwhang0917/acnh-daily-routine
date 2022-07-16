@@ -1,4 +1,4 @@
-import useSunriseSunset from "../src/hooks/useSunriseSunset";
+import useSunriseSunset from "@hooks/useSunriseSunset";
 
 function App() {
   const { sunriseAt, sunsetAt } = useSunriseSunset();
