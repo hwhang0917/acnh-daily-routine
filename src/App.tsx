@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import useSunriseSunset from "@hooks/useSunriseSunset";
 import React, { useEffect, useState } from "react";
+import Sky from "./components/Sky.component";
 
 const COLORS = ["cornflowerblue", "indianred", "black"];
 
@@ -21,7 +22,7 @@ function App() {
 
   return (
     <React.Fragment>
-      <Background color={COLORS[color]} />
+      <Sky />
       <button
         onClick={() => {
           setColor((idx) => {
@@ -42,16 +43,3 @@ function App() {
 }
 
 export default App;
-
-const Background = styled("div")<{ color: string }>(
-  ({ color }) => css`
-    position: fixed;
-    z-index: -1;
-    inset: 0;
-    height: 100vh;
-    width: 100%;
-    background-color: ${color};
-
-    transition: background-color ease-in-out 60s;
-  `
-);
