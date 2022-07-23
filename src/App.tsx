@@ -1,7 +1,6 @@
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
 import useSunriseSunset from "@hooks/useSunriseSunset";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import Music from "./components/Music.component";
 import Sky from "./components/Sky.component";
 
 const COLORS = ["cornflowerblue", "indianred", "black"];
@@ -38,6 +37,7 @@ function App() {
         <h1>SUNRISE: {sunriseAt.toLocaleTimeString()}</h1>
         <h1>SUNSET: {sunsetAt.toLocaleTimeString()}</h1>
       </div>
+      <Music />
     </React.Fragment>
   );
 }
