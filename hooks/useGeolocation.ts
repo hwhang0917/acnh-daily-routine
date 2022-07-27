@@ -28,7 +28,7 @@ export const useGeolocation = () => {
         error: notSupportedErr,
       });
     }
-  }, [geoState]);
+  }, [geoState, setError, setGeolocation]);
 
   return geoState;
 };

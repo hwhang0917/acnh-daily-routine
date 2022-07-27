@@ -28,7 +28,7 @@ const useSunriseSunset = () => {
       sunriseAt: getSunrise(coords.latitude, coords.longitude),
       sunsetAt: getSunset(coords.latitude, coords.longitude),
     };
-  }, [coords]);
+  }, [coords, error]);
 
   return times;
 };
