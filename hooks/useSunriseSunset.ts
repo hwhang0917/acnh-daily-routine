@@ -1,11 +1,7 @@
 import { useMemo } from "react";
 import { getSunrise, getSunset } from "sunrise-sunset-js";
 import { useGeolocation } from "./useGeolocation";
-
-const DEFAULT_COORDS = {
-  longitude: 37.566,
-  latitude: 126.977,
-};
+import { DEFAULT_COORDS } from "@constants";
 
 interface ISunriseSunset {
   sunriseAt: Date;
@@ -18,11 +14,8 @@ const useSunriseSunset = () => {
   const times = useMemo<ISunriseSunset>(() => {
     if (error || !coords)
       return {
-        sunriseAt: getSunrise(
-          DEFAULT_COORDS.latitude,
-          DEFAULT_COORDS.longitude
-        ),
-        sunsetAt: getSunset(DEFAULT_COORDS.latitude, DEFAULT_COORDS.longitude),
+        sunriseAt: getSunrise(DEFAULT_COORDS.lat, DEFAULT_COORDS.lon),
+        sunsetAt: getSunset(DEFAULT_COORDS.lat, DEFAULT_COORDS.lon),
       };
     return {
       sunriseAt: getSunrise(coords.latitude, coords.longitude),

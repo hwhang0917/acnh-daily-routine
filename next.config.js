@@ -46,9 +46,10 @@ const securityHeaders = [
 
 /** @type {(phase: string) => import('next').NextConfig} */
 module.exports = (phase) => {
+  const isProduction = phase === PHASE_PRODUCTION_SERVER;
   return {
     async headers() {
-      return phase === PHASE_PRODUCTION_SERVER
+      return isProduction
         ? [
             {
               source: "/:path*",
@@ -59,7 +60,7 @@ module.exports = (phase) => {
     },
     compiler: {
       styledComponents: true,
-      removeConsole: true,
+      removeConsole: isProduction,
     },
     reactStrictMode: true,
     swcMinify: true,
