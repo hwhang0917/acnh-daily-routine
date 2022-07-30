@@ -7,36 +7,36 @@ import { getSongCode } from "@utils";
 import { useAxios } from "@hooks/useAxios";
 import { IWeatherResponse } from "./api/weather";
 import { useState } from "react";
+import { useWeather } from "@hooks/useWeather";
 
 interface IProps {
   songList: HourlyMusic;
 }
 
 const Home = ({ songList }: IProps) => {
-  const { data } = useAxios<IWeatherResponse>("GET", "/api/weather");
+  const { weather, loading } = useWeather();
   const [playing, setPlaying] = useState(false);
 
-  return (
-    <div>
-      <Sky />
-      <MusicBox />
-      <ReactHowler
-        src={
-          songList[
-            getSongCode({
-              hour: new Date().getHours(),
-              weather: data?.currentWeather ?? "Sunny",
-            })
-          ]["music_uri"]
-        }
-        format={["mp3"]}
-        playing={playing}
-        loop
-      />
-      <button onClick={() => setPlaying((s) => !s)}>TOGGLE</button>
-      <h1>Hello World</h1>
-    </div>
-  );
+  if (loading) return <h1>Loading</h1>;
+  else {
+    const songCode = getSongCode({ hour: new Date().getHours(), weather });
+    const song = songList[songCode];
+    return (
+      <div>
+        <Sky />
+        <ReactHowler
+          src={song.music_uri}
+          format={["mp3"]}
+          playing={playing}
+          loop
+        />
+        <button onClick={() => setPlaying((s) => !s)}>
+          {playing ? "PAUSE" : "PLAY"}
+        </button>
+        <h1>{song["file-name"]}</h1>
+      </div>
+    );
+  }
 };
 
 export default Home;
