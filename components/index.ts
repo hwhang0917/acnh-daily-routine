@@ -1,2 +1,2 @@
-export * from "./MusicBox.components";
+export * from "./Clock.components";
 export * from "./Sky.components";
