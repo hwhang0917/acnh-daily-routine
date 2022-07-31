@@ -23,7 +23,8 @@ const BackgroundMusic = ({ time, songList }: IProps) => {
   const isRaining = weather === "Rainy";
 
   // Refetch weather data every 15 minutes
-  if (time.getMinutes() % 15 && time.getSeconds() === 0) fetchWeatherData();
+  if (time.getMinutes() % 15 === 0 && time.getSeconds() === 0)
+    fetchWeatherData();
 
   // Get songCode for current hour
   const songCode = getSongCode({
