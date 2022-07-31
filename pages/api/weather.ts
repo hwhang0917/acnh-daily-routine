@@ -33,12 +33,13 @@ export default async function handler(
    * {@link https://openweathermap.org/weather-conditions}
    */
   const weatherCode = data.weather[0].id;
-  console.log(data);
 
   let currentWeather: Weather = "Sunny";
   if (weatherCode < 400 || (400 < weatherCode && weatherCode < 600))
     currentWeather = "Rainy";
   if (600 <= weatherCode && weatherCode < 700) currentWeather = "Snowy";
 
-  res.status(200).json({ currentWeather });
+  res.status(200).json({
+    currentWeather,
+  });
 }

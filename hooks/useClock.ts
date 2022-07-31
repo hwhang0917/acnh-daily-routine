@@ -7,7 +7,7 @@ export enum Interval {
   EVERY_HOUR = 3_600_000,
 }
 
-export const useClock = (interval: Interval) => {
+export const useClock = (interval: Interval = Interval.EVERY_SECOND) => {
   const [time, setTime] = useState(new Date());
   useInterval(() => {
     setTime(new Date());

@@ -9,7 +9,7 @@ export const useWeather = () => {
   const [weather, setWeather] = useState<Weather>("Sunny");
   const [error, setError] = useState<any>();
 
-  const getAllData = useCallback(async () => {
+  const fetchWeatherData = useCallback(async () => {
     let lat: number = DEFAULT_COORDS.lat;
     let lon: number = DEFAULT_COORDS.lon;
 
@@ -46,8 +46,8 @@ export const useWeather = () => {
   }, []);
 
   useEffect(() => {
-    getAllData();
-  }, [getAllData]);
+    fetchWeatherData();
+  }, [fetchWeatherData]);
 
-  return { loading, error, weather };
+  return { loading, error, weather, fetchWeatherData };
 };
