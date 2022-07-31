@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ReactHowler from "react-howler";
 import { faVolumeMute, faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useWeather } from "@hooks/useWeather";
+import { useWeather } from "@hooks";
 import { getSongCode } from "@utils";
 import { HourlyMusic } from "@interfaces";
 import { RingLoading } from "@components";

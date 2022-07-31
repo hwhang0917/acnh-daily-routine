@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
-export const RingLoading = () => {
+interface IProps {
+  color?: string;
+}
+
+export const RingLoading = ({ color }: IProps) => {
   return (
     <LoadingWrapper aria-label="loading logo">
-      <OuterRing>
+      <OuterRing color={color}>
         <InnerRing />
       </OuterRing>
     </LoadingWrapper>

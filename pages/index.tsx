@@ -1,13 +1,10 @@
 import type { GetServerSideProps } from "next";
 import axios from "axios";
-import ReactHowler from "react-howler";
 import { Sky } from "@components";
 import { HourlyMusic } from "@interfaces";
-import { getSongCode } from "@utils";
 import { useState } from "react";
-import { useWeather } from "@hooks/useWeather";
 import { useSpring, animated, config } from "@react-spring/web";
-import { useClock } from "@hooks/useClock";
+import { useClock } from "@hooks";
 import BackgroundMusic from "components/BackgroundMusic.components";
 
 interface IProps {
