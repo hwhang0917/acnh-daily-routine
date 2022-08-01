@@ -8,7 +8,7 @@ import { getSongCode } from "@utils";
 import { HourlyMusic } from "@interfaces";
 import { RingLoading } from "@components";
 
-const RAIN_ASSET_PATH = "/assets/mixkit-rain-loop-1250.wav";
+const RAIN_ASSET_PATH = "/assets/sounds/mixkit-rain-loop-1250.wav";
 
 interface IProps {
   time: Date;
