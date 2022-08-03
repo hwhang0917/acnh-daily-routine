@@ -7,33 +7,35 @@ interface IProps {
 export const RingLoading = ({ color }: IProps) => {
   return (
     <LoadingWrapper aria-label="loading logo">
-      <OuterRing color={color}>
-        <InnerRing />
-      </OuterRing>
+      <Ring color={color} />
     </LoadingWrapper>
   );
 };
 
 const LoadingWrapper = styled.div``;
-const InnerRing = styled.div`
-  width: 23px;
-  height: 23px;
-  background-color: white;
-  border-radius: 50%;
-`;
-const OuterRing = styled.div<{ color?: string }>`
-  width: 25px;
-  height: 25px;
-  background-color: ${({ color }) => color ?? "gray"};
-  border-radius: 50%;
+const Ring = styled.div<{ color?: string }>`
+  display: inline-block;
+  width: 80px;
+  height: 80px;
 
-  animation: rotate 1s infinite linear;
+  &::after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 6px solid;
+    border-radius: 50%;
+    border-color: ${({ color }) => color ?? "gray"} transparent
+      ${({ color }) => color ?? "gray"} transparent;
+    animation: rotate 1.2s infinite linear;
+  }
 
   @keyframes rotate {
-    from {
+    0% {
       transform: rotate(0deg);
     }
-    to {
+    100% {
       transform: rotate(360deg);
     }
   }

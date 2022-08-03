@@ -1,31 +1,29 @@
-import type { GetServerSideProps } from "next";
 import axios from "axios";
-import { Sky } from "@components";
+import type { GetServerSideProps } from "next";
+import { BackgroundMusic, Clock, Sky } from "@components";
 import { HourlyMusic } from "@interfaces";
-import { useState } from "react";
-import { useSpring, animated, config } from "@react-spring/web";
-import { useClock } from "@hooks";
-import BackgroundMusic from "components/BackgroundMusic.components";
+import { useClock, useWeather } from "@hooks";
+import { openWeatherCodeToACNHCode } from "@utils";
 
 interface IProps {
   songList: HourlyMusic;
 }
 
 const Home = ({ songList }: IProps) => {
-  const [toggle, setToggle] = useState(false);
-  const number = useSpring({
-    test: toggle ? 100 : 0,
-    config: config.molasses,
-  });
+  const { weatherCode, loading, fetchWeatherData } = useWeather();
   const time = useClock();
 
   return (
     <div>
-      <Sky />
-      <BackgroundMusic songList={songList} time={time} />
-      <h1>{time.toLocaleTimeString()}</h1>
-      <animated.h2>{number.test.to((n) => n.toFixed(0))}</animated.h2>
-      <button onClick={() => setToggle((s) => !s)}>TOGGLE</button>
+      <Sky weatherCode={weatherCode} />
+      <BackgroundMusic
+        songList={songList}
+        time={time}
+        weather={openWeatherCodeToACNHCode(weatherCode)}
+        loading={loading}
+        refrech={fetchWeatherData}
+      />
+      <Clock time={time} />
     </div>
   );
 };

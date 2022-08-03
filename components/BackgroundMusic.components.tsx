@@ -5,26 +5,48 @@ import { faVolumeMute, faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useWeather } from "@hooks";
 import { getSongCode } from "@utils";
-import { HourlyMusic } from "@interfaces";
+import { HourlyMusic, SongWeather } from "@interfaces";
 import { RingLoading } from "@components";
 
 const RAIN_ASSET_PATH = "/assets/sounds/mixkit-rain-loop-1250.wav";
 
 interface IProps {
+  /**
+   * Current time
+   */
   time: Date;
+  /**
+   * Animal Crossing songlist
+   */
   songList: HourlyMusic;
+  /**
+   * Song weather
+   */
+  weather: SongWeather;
+  /**
+   * Loading state
+   */
+  loading: boolean;
+  /**
+   * Refetch function
+   */
+  refrech: () => void;
 }
 
-const BackgroundMusic = ({ time, songList }: IProps) => {
-  const { weather, loading, fetchWeatherData } = useWeather();
+export const BackgroundMusic = ({
+  time,
+  songList,
+  weather,
+  loading,
+  refrech,
+}: IProps) => {
   const [soundOn, setSoundOn] = useState(false);
 
   // Wheter `weather` is raining (😜 Getit? )
   const isRaining = weather === "Rainy";
 
   // Refetch weather data every 15 minutes
-  if (time.getMinutes() % 15 === 0 && time.getSeconds() === 0)
-    fetchWeatherData();
+  if (time.getMinutes() % 15 === 0 && time.getSeconds() === 0) refrech();
 
   // Get songCode for current hour
   const songCode = getSongCode({
@@ -63,8 +85,6 @@ const BackgroundMusic = ({ time, songList }: IProps) => {
     </div>
   );
 };
-
-export default BackgroundMusic;
 
 const VolumeButton = styled.button`
   all: unset;

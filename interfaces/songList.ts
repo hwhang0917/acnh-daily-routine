@@ -1,8 +1,8 @@
 /**
  * 날씨 종류
  */
-export type Weather = "Rainy" | "Snowy" | "Sunny";
-export type HourMusicCode = `BGM_24Hour_${string}_${Weather}`;
+export type SongWeather = "Rainy" | "Snowy" | "Sunny";
+export type HourMusicCode = `BGM_24Hour_${string}_${SongWeather}`;
 
 /**
  * 시간별 음악
@@ -31,7 +31,7 @@ export interface HourlyMusic {
     /**
      * 날씨
      */
-    weather: Weather;
+    weather: SongWeather;
     /**
      * 음악 URI
      */

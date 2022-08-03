@@ -1,14 +1,24 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import dayjs from "dayjs";
 import axios from "axios";
 import { DEFAULT_COORDS } from "@constants";
-import { Weather } from "@interfaces";
 
-/**
- * ACNH Background Music에 맞는 현재 지역 날씨
- * @returns "Sunny" | "Rainy" | "Snowy"
- */
+interface HourMinute {
+  hh: number;
+  mm: number;
+}
 export interface IWeatherResponse {
-  currentWeather: Weather;
+  /**
+   * Open Weather API Condition ID
+   */
+  weatherCode: number;
+  sunrise?: HourMinute;
+  sunset?: HourMinute;
+  /**
+   * mm of rain per hour
+   */
+  rain?: number;
+  city: string;
 }
 
 export default async function handler(
@@ -32,14 +42,22 @@ export default async function handler(
    * Open Weather Conditions
    * {@link https://openweathermap.org/weather-conditions}
    */
-  const weatherCode = data.weather[0].id;
-
-  let currentWeather: Weather = "Sunny";
-  if (weatherCode < 400 || (400 < weatherCode && weatherCode < 600))
-    currentWeather = "Rainy";
-  if (600 <= weatherCode && weatherCode < 700) currentWeather = "Snowy";
+  const weatherCode = data.weather[0].id ?? 800;
+  const sunriseDayjs = dayjs.unix(data.sys.sunrise);
+  const sunsetDayjs = dayjs.unix(data.sys.sunset);
+  const rain = data.rain ? data.rain["1h"] : undefined;
 
   res.status(200).json({
-    currentWeather,
+    weatherCode,
+    sunrise: {
+      hh: sunriseDayjs.hour(),
+      mm: sunriseDayjs.minute(),
+    },
+    sunset: {
+      hh: sunsetDayjs.hour(),
+      mm: sunsetDayjs.minute(),
+    },
+    rain,
+    city: data?.name,
   });
 }

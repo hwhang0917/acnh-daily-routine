@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useInterval from "./useInterval";
+import { useInterval } from "usehooks-ts";
 
 export enum Interval {
   EVERY_SECOND = 1_000,

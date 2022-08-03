@@ -1,4 +1,4 @@
-import { HourMusicCode, Weather } from "@interfaces";
+import { HourMusicCode, SongWeather } from "@interfaces";
 
 /**
  * 시간별 음악 코드
@@ -11,7 +11,7 @@ interface SongCodeInput {
   /**
    * 날씨
    */
-  weather: Weather;
+  weather: SongWeather;
 }
 
 /**
