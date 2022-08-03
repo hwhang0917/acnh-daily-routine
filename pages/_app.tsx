@@ -3,7 +3,7 @@ import Head from "next/head";
 import React from "react";
 import GlobalStyle from "../styles/Globalstyle";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
     <React.Fragment>
       <Head>
@@ -26,4 +26,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default App;
