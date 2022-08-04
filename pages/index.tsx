@@ -1,6 +1,6 @@
 import axios from "axios";
 import type { GetServerSideProps } from "next";
-import { BackgroundMusic, Clock, Sky } from "@components";
+import { BackgroundMusic, Clock, Phone, Sky } from "@components";
 import { HourlyMusic } from "@interfaces";
 import { useClock, useWeather } from "@hooks";
 import { openWeatherCodeToACNHCode } from "@utils";
@@ -15,15 +15,16 @@ const Home = ({ songList }: IProps) => {
 
   return (
     <div>
-      <Sky weatherCode={weatherCode} />
-      <BackgroundMusic
-        songList={songList}
-        time={time}
-        weather={openWeatherCodeToACNHCode(weatherCode)}
-        loading={loading}
-        refrech={fetchWeatherData}
-      />
-      <Clock time={time} />
+      <Phone>
+        <BackgroundMusic
+          songList={songList}
+          time={time}
+          weather={openWeatherCodeToACNHCode(weatherCode)}
+          loading={loading}
+          refrech={fetchWeatherData}
+        />
+        <Clock time={time} />
+      </Phone>
     </div>
   );
 };

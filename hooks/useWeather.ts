@@ -21,7 +21,6 @@ export const useWeather = () => {
   const [error, setError] = useState<any>();
 
   const fetchWeatherData = useCallback(async () => {
-    setLoading(true);
     let lat: number = DEFAULT_COORDS.lat;
     let lon: number = DEFAULT_COORDS.lon;
 

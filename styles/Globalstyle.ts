@@ -12,7 +12,6 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         font-family: 'CookieRun-Regular';
-        background-color: #74b9ff;
     }
 `;
 
