@@ -4,6 +4,7 @@ import { BackgroundMusic, Clock, Phone, Sky } from "@components";
 import { HourlyMusic } from "@interfaces";
 import { useClock, useWeather } from "@hooks";
 import { openWeatherCodeToACNHCode } from "@utils";
+import styled from "styled-components";
 
 interface IProps {
   songList: HourlyMusic;
@@ -14,7 +15,7 @@ const Home = ({ songList }: IProps) => {
   const time = useClock();
 
   return (
-    <div>
+    <Wrapper>
       <Phone>
         <BackgroundMusic
           songList={songList}
@@ -25,7 +26,7 @@ const Home = ({ songList }: IProps) => {
         />
         <Clock time={time} />
       </Phone>
-    </div>
+    </Wrapper>
   );
 };
 
@@ -43,3 +44,9 @@ export const getServerSideProps: GetServerSideProps<IProps> = async () => {
     },
   };
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
