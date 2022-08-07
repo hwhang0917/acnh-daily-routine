@@ -1,13 +1,5 @@
 const { PHASE_PRODUCTION_SERVER } = require("next/constants");
 
-const ContentSecurityPolicy = `
-  default-src 'self';
-  script-src 'self';
-  child-src example.com;
-  style-src 'self' example.com;
-  font-src 'self';
-`;
-
 /** @type {Array<{key: string, value: string}>} */
 const securityHeaders = [
   {
@@ -37,10 +29,6 @@ const securityHeaders = [
   {
     key: "Referrer-Policy",
     value: "origin-when-cross-origin",
-  },
-  {
-    key: "Content-Security-Policy",
-    value: ContentSecurityPolicy.replace(/\s{2,}/g, " ").trim(),
   },
 ];
 
