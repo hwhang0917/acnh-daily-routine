@@ -11,5 +11,6 @@ export const Phone = ({ children }: IProps) => {
 
 const PhoneWrapper = styled.section`
   background-color: #f7f3e5;
-  max-width: 750px;
+  width: 100vh;
+  max-width: 670px;
 `;

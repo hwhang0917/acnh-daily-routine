@@ -7,6 +7,7 @@ import { useWeather } from "@hooks";
 import { getSongCode } from "@utils";
 import { HourlyMusic, SongWeather } from "@interfaces";
 import { RingLoading } from "@components";
+import { AppIcon } from "./AppIcon.components";
 
 const RAIN_ASSET_PATH = "/assets/sounds/mixkit-rain-loop-1250.wav";
 
@@ -55,9 +56,14 @@ export const BackgroundMusic = ({
   });
   const currentSong = songList[songCode];
 
-  if (loading) return <RingLoading />;
+  if (loading)
+    return (
+      <AppIcon>
+        <RingLoading />
+      </AppIcon>
+    );
   return (
-    <div aria-label="background music">
+    <AppIcon>
       {/* Rain Sound */}
       <ReactHowler
         src={RAIN_ASSET_PATH}
@@ -82,15 +88,16 @@ export const BackgroundMusic = ({
       >
         <FontAwesomeIcon icon={soundOn ? faVolumeHigh : faVolumeMute} />
       </VolumeButton>
-    </div>
+    </AppIcon>
   );
 };
 
 const VolumeButton = styled.button`
   all: unset;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
 
   &:hover {
-    color: red;
   }
 `;
