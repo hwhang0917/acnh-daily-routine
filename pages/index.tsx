@@ -1,6 +1,6 @@
 import axios from "axios";
 import type { GetServerSideProps } from "next";
-import { BackgroundMusic, Clock, Phone, Sky } from "@components";
+import { BackgroundMusic, Clock, Phone } from "@components";
 import { HourlyMusic } from "@interfaces";
 import { useClock, useWeather } from "@hooks";
 import { openWeatherCodeToACNHCode } from "@utils";
