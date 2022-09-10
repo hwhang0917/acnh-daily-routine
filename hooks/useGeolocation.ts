@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
+import { DEFAULT_LAT, DEFAULT_LON } from "@constants";
 
-interface ICoordinates {
+interface IGeolocation {
   latitude: number;
   longitude: number;
 }
@@ -8,13 +9,16 @@ interface ICoordinates {
 /**
  * Seoul, South Korea coordinates
  */
-const initialState: ICoordinates = {
-  latitude: 37.25,
-  longitude: 127.06,
+const initialState: IGeolocation = {
+  latitude: DEFAULT_LAT,
+  longitude: DEFAULT_LON,
 };
 
+/**
+ * Get coordinates using Geolocation API
+ */
 export const useGeolocation = () => {
-  const [coords, setCoords] = useState<ICoordinates>(initialState);
+  const [coords, setCoords] = useState<IGeolocation>(initialState);
 
   const positionCallback = useCallback<PositionCallback>(
     ({ coords: { latitude, longitude } }) => {
@@ -27,6 +31,7 @@ export const useGeolocation = () => {
     []
   );
 
+  // Get geolocation on load
   useEffect(() => {
     if (typeof window !== "undefined" && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
