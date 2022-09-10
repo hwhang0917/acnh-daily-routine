@@ -11,7 +11,6 @@
 ## Used Technologies
 
 - [Next.js](https://nextjs.org/)
-- [Axios](https://axios-http.com/)
 - [React Howler](https://www.npmjs.com/package/react-howler)
 - [Tailwind CSS](https://tailwindcss.com/)
 
