@@ -7,9 +7,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Header />
-      <main className="aspect-auto w-full flex justify-center px-2">
-        {children}
-      </main>
+      {children}
       <Footer />
     </>
   );

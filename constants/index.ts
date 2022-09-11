@@ -4,4 +4,6 @@ export const DEFAULT_LON = 126.978;
 export const OPENWEATHER_API =
   "https://api.openweathermap.org/data/2.5/weather";
 
+export const ACNH_API = "https://acnhapi.com/v1/";
+
 export const EVERY_FIFTHTEEN_MINUTES = 900_000;

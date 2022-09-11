@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { Layout } from "@components";
 import "../styles/globals.css";
 
 function App({ Component, pageProps }: AppProps) {
@@ -9,7 +10,9 @@ function App({ Component, pageProps }: AppProps) {
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
         <title>ACNH:Daily Routine</title>
       </Head>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 }

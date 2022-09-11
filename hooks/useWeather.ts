@@ -1,17 +1,11 @@
 import dayjs from "dayjs";
 import { useCallback, useEffect, useState } from "react";
 import { IOpenWeatherResponse } from "../interfaces/openWeather.interface";
-import { useGeolocation } from "./useGeolocation";
 
 /**
  * Use OpenWeather API realted custom hooks
  */
 export const useWeather = () => {
-  // Get geolocation coordinates for weather API
-  const {
-    coords: { latitude, longitude },
-  } = useGeolocation();
-
   // Loading state
   const [loading, setLoading] = useState<boolean>(true);
   // Weather result
@@ -25,6 +19,14 @@ export const useWeather = () => {
   const fetchCurrentWeather = useCallback(async () => {
     // Start loading
     setLoading(true);
+
+    // Get Geolocation
+    const {
+      coords: { longitude, latitude },
+    } = await new Promise<GeolocationPosition>((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+    // Get current weather
     const currentWeather = await new Promise<IOpenWeatherResponse>(
       (resolve, reject) => {
         fetch(`/api/weather?lat=${latitude}&lon=${longitude}`)
@@ -45,18 +47,17 @@ export const useWeather = () => {
       if (sunrise.isBefore(now) && sunset.isAfter(now)) setIsNight(false);
       else setIsNight(true);
     }
-  }, [latitude, longitude]);
+  }, []);
 
   // Fetch weather once
   useEffect(() => {
     fetchCurrentWeather();
-  }, [longitude, latitude]);
+  }, []);
 
   return {
     loading,
     weather,
     fetchCurrentWeather,
-    weatherCode: weather?.weather[0].id ?? 800,
     isNight,
   };
 };

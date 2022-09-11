@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { EVERY_FIFTHTEEN_MINUTES } from "@constants";
-import { useGeolocation, useWeather } from "@hooks";
+import { useWeather } from "@hooks";
 import { Spinner } from "@components";
 import { IOpenWeatherResponse } from "../interfaces/openWeather.interface";
 
@@ -69,35 +69,53 @@ const WeatherDetail = ({
   refetch: () => void;
 }) => {
   return (
-    <div className="absolute dark:bg-slate-800 bg-stone-200 shadow-xl w-48 right-0 rounded">
+    <div className="absolute dark:bg-slate-800 bg-stone-200 shadow-xl w-48 right-0 top-6 rounded">
       <ul className="divide-y divide-neutral-500 text-xs">
         <li className="flex p-2 justify-between">
-          <span>City</span>
-          <span>{detail?.name}</span>
-        </li>
-        <li className="flex p-2 justify-between">
-          <span>Status</span>
+          <span className="flex gap-2">
+            <i className="fa-solid fa-info" />
+            <span>Status</span>
+          </span>
           <span>{detail?.weather[0].main}</span>
         </li>
         <li className="flex p-2 justify-between">
-          <span>Temperature</span>
+          <span className="flex gap-2">
+            <i className="fa-solid fa-building" />
+            <span>City</span>
+          </span>
+          <span>{detail?.name}</span>
+        </li>
+        <li className="flex p-2 justify-between">
+          <span className="flex gap-2">
+            <i className="fa-solid fa-temperature-half" />
+            <span>Temperatrue</span>
+          </span>
           <span>{detail?.main.temp} &#8451;</span>
         </li>
         <li className="flex p-2 justify-between">
-          <span>Feels Like</span>
+          <span className="flex gap-2">
+            <i className="fa-solid fa-temperature-half" />
+            <span>Feels Like</span>
+          </span>
           <span>{detail?.main.feels_like} &#8451;</span>
         </li>
         <li className="flex p-2 justify-between">
-          <span>Humidity</span>
-          <span>{detail?.main.humidity} %</span>
+          <span className="flex gap-2">
+            <i className="fa-solid fa-droplet" />
+            <span>Humidity</span>
+          </span>
+          <span className="flex gap-2">
+            <span>{detail?.main.humidity}</span>
+            <i className="fa-solid fa-percent" />
+          </span>
         </li>
         <li
-          className="flex p-2 justify-between cursor-pointer"
+          className="flex p-2 justify-between cursor-pointer hover:text-purple-300"
           onClick={refetch}
         >
-          <span>Refetch</span>
-          <span>
+          <span className="flex gap-2">
             <i className="fa-solid fa-rotate-right" />
+            <span>Refetch</span>
           </span>
         </li>
       </ul>
@@ -110,8 +128,7 @@ const WeatherDetail = ({
  */
 export const WeatherStats = () => {
   const [detailOpen, setDetailOpen] = useState<boolean>(false);
-  const { loading, weatherCode, isNight, fetchCurrentWeather, weather } =
-    useWeather();
+  const { loading, isNight, fetchCurrentWeather, weather } = useWeather();
 
   useEffect(() => {
     // Fetch weather every 15 minutes
@@ -126,15 +143,24 @@ export const WeatherStats = () => {
 
   // 로딩 아이콘
   if (loading) return <Spinner />;
+
+  // 날씨 아이콘
   return (
     <span className="relative">
-      <i
-        className={`cursor-pointer hover:text-violet-300 fa-solid ${getFAWeatherIcon(
-          weatherCode,
-          isNight
-        )}`}
+      <span
+        className="cursor-pointer hover:text-violet-300 flex gap-2"
         onClick={toggleDetail}
-      />
+      >
+        <i
+          className={`fa-solid ${getFAWeatherIcon(
+            weather?.weather?.at(0)?.id ?? 800,
+            isNight
+          )}`}
+        />
+        <i
+          className={`fa-solid fa-angle-${detailOpen ? "up" : "down"} text-sm`}
+        />
+      </span>
       {detailOpen && (
         <WeatherDetail detail={weather} refetch={fetchCurrentWeather} />
       )}
