@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { DEFAULT_LAT, DEFAULT_LON } from "@constants";
 
-interface IGeolocation {
+export interface IGeolocation {
   latitude: number;
   longitude: number;
 }
@@ -31,8 +31,7 @@ export const useGeolocation = () => {
     []
   );
 
-  // Get geolocation on load
-  useEffect(() => {
+  const fetchGeolocation = useCallback(() => {
     if (typeof window !== "undefined" && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         positionCallback,
@@ -41,5 +40,10 @@ export const useGeolocation = () => {
     }
   }, []);
 
-  return coords;
+  // Get geolocation on load
+  useEffect(() => {
+    fetchGeolocation();
+  }, []);
+
+  return { coords, fetchGeolocation };
 };

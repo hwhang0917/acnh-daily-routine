@@ -11,7 +11,7 @@ export default function Document() {
           media="all"
         />
       </Head>
-      <body>
+      <body className="bg-white dark:bg-slate-900 dark:text-white">
         <Main />
         <NextScript />
       </body>

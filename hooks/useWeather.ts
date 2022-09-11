@@ -8,7 +8,9 @@ import { useGeolocation } from "./useGeolocation";
  */
 export const useWeather = () => {
   // Get geolocation coordinates for weather API
-  const { latitude, longitude } = useGeolocation();
+  const {
+    coords: { latitude, longitude },
+  } = useGeolocation();
 
   // Loading state
   const [loading, setLoading] = useState<boolean>(true);
@@ -48,7 +50,7 @@ export const useWeather = () => {
   // Fetch weather once
   useEffect(() => {
     fetchCurrentWeather();
-  }, []);
+  }, [longitude, latitude]);
 
   return {
     loading,

@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { WeatherIcon } from "@components";
+import { WeatherStats } from "@components";
 const DynamicClock = dynamic(
   () => import("./Clock.components").then((mod) => mod.Clock),
   {
@@ -9,13 +9,13 @@ const DynamicClock = dynamic(
 
 export const Header = () => {
   return (
-    <header className="w-full">
-      <ul className="flex px-2 py-1">
+    <header className="w-full text-xl p-3 bg-black bg-opacity-20 mb-5">
+      <ul className="flex ">
         <li className="w-1/2 text-start">
           <DynamicClock />
         </li>
-        <li className="w-1/2 flex justify-end content-center gap-2">
-          <WeatherIcon />
+        <li className="w-1/2 flex justify-end content-center gap-5 select-none">
+          <WeatherStats />
           <i className="fa-solid fa-wifi" />
         </li>
       </ul>
