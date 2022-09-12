@@ -9,7 +9,7 @@ const DynamicClock = dynamic(
 
 export const Header = () => {
   return (
-    <header className="w-full text-xl p-3 backdrop-blur-sm bg-black bg-opacity-20 mb-5 sticky top-0 ">
+    <header className="w-full text-xl p-3 backdrop-blur-sm bg-black bg-opacity-50 mb-5 sticky top-0 z-50">
       <ul className="flex">
         <li className="w-1/2 text-start">
           <DynamicClock />

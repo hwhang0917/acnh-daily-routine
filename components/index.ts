@@ -7,5 +7,5 @@ export * from "./Spinner.components";
 
 // Main sections
 export * from "./Todo.components";
-export * from "./Cover.components";
+export * from "./Player.components";
 export * from "./Playlist.components";

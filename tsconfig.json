@@ -18,7 +18,8 @@
       "@components": ["./components/index.ts"],
       "@constants": ["./constants/index.ts"],
       "@hooks": ["./hooks/index.ts"],
-      "@interfaces": ["./interfaces/index.ts"]
+      "@interfaces": ["./interfaces/index.ts"],
+      "@utils": ["./utils/index.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

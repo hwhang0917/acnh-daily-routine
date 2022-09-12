@@ -29,7 +29,7 @@ export const Todo = () => {
     <section className="lg:h-fit border border-slate-400 p-5 rounded col-span-2 order-first lg:order-none">
       <h2 className="text-xl py-3 flex items-end gap-2">
         <span>Todo</span>
-        <span className="text-xs text-slate-300">
+        <span className="text-xs dark:text-slate-300 text-slate-500">
           {date.format("YYYY-MM-DD (ddd)")}
         </span>
       </h2>
@@ -43,10 +43,10 @@ export const Todo = () => {
         }}
       >
         <label
-          htmlFor="search"
+          htmlFor="todo"
           className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
         >
-          Your Email
+          Add Todo Item
         </label>
         <div className="relative">
           <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
