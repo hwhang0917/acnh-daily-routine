@@ -153,7 +153,7 @@ export const WeatherStats = () => {
       EVERY_FIFTHTEEN_MINUTES
     );
     return () => clearInterval(weatherInterval);
-  }, []);
+  }, [fetchWeatherAndLastUpdated]);
 
   const toggleDetail = useCallback(() => setDetailOpen((state) => !state), []);
 

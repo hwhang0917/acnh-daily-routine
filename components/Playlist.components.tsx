@@ -20,7 +20,7 @@ export const Playlist = ({ songList, currentSong, toggleSong }: IProps) => {
       song.title.toLowerCase().includes(deferredQuery.toLowerCase())
     );
     setFilteredSongList(newFilteredList);
-  }, [deferredQuery]);
+  }, [deferredQuery, songList]);
 
   return (
     <section className="lg:h-fit border border-slate-400 p-5 rounded">

@@ -38,6 +38,7 @@ export const Player = ({ currentSong, playing, togglePlay }: IProps) => {
         <div className="relative w-64 h-64">
           <Image
             src={currentSong?.cover ?? "/covers/placeholder-album.jpeg"}
+            alt="placeholder album cover"
             layout="fill"
             objectFit="contain"
           />

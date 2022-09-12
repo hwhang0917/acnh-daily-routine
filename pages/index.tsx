@@ -22,11 +22,14 @@ const Home: NextPage<IProps> = ({ songList, hourlyBgmList }) => {
   const togglePlay = useCallback(() => {
     setPlaying((s) => !s);
   }, []);
-  const toggleSong = useCallback((inputTitle: string) => {
-    const currentSong = songList.find(({ title }) => title === inputTitle);
-    setCurrentSong(currentSong);
-    setPlaying(true);
-  }, []);
+  const toggleSong = useCallback(
+    (inputTitle: string) => {
+      const currentSong = songList.find(({ title }) => title === inputTitle);
+      setCurrentSong(currentSong);
+      setPlaying(true);
+    },
+    [songList]
+  );
 
   return (
     <main className="h-fit lg:grid lg:grid-cols-4 flex flex-col flex-1 gap-6 px-5 pb-60">
