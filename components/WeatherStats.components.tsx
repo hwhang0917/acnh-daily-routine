@@ -1,9 +1,9 @@
+import dayjs from "dayjs";
 import { useCallback, useEffect, useState } from "react";
 import { EVERY_FIFTHTEEN_MINUTES } from "@constants";
 import { useWeather } from "@hooks";
 import { Spinner } from "@components";
 import { IOpenWeatherResponse } from "../interfaces/openWeather.interface";
-import dayjs from "dayjs";
 
 /**
  * Converts Open Weather Weathercode to Fontawesome weather icon classname

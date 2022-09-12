@@ -4,9 +4,11 @@ import { IParsedBGM } from "../interfaces/acnhApi.interface";
 
 interface IProps {
   songList: IParsedBGM[];
+  currentSong?: IParsedBGM;
+  toggleSong: (songTitle: string) => void;
 }
 
-export const Playlist = ({ songList }: IProps) => {
+export const Playlist = ({ songList, currentSong, toggleSong }: IProps) => {
   const [expandlist, setExpandlist] = useState<boolean>(false);
   const [query, setQuery] = useState<string>("");
   const deferredQuery = useDeferredValue(query);
@@ -53,20 +55,33 @@ export const Playlist = ({ songList }: IProps) => {
       <ul
         className={`${
           expandlist ? "max-h-fit" : "max-h-96 overflow-y-scroll"
-        } divide-y dark:divide-slate-800 divide-stone-300 dark:text-neutral-300 text-neutral-700 text-sm`}
+        } divide-y dark:divide-slate-800 divide-stone-300 dark:text-neutral-300 text-neutral-700 text-sm flex flex-col`}
       >
         {filteredSongList.map((song, idx) => (
           <li
             key={idx}
-            className="flex items-center gap-5 py-2 cursor-pointer dark:hover:text-purple-300 hover:text-purple-500"
+            className={`flex justify-between items-center py-2 cursor-pointer dark:hover:text-purple-300 hover:text-purple-500 ${
+              song.title === currentSong?.title ? "text-blue-500" : ""
+            }`}
+            onClick={() => {
+              toggleSong(song.title);
+            }}
           >
-            <Image
-              src={song.cover ?? ""}
-              width={50}
-              height={50}
-              alt={"Album cover for " + song.title}
-            />
-            <span>{song.title}</span>
+            <div className="flex items-center gap-5">
+              <Image
+                src={song.cover ?? ""}
+                width={50}
+                height={50}
+                alt={"Album cover for " + song.title}
+              />
+              <span>{song.title}</span>
+            </div>
+            {song.title === currentSong?.title && (
+              <div className="text-xs flex gap-2">
+                <i className="fa-solid fa-play" />
+                <span>Now Playing</span>
+              </div>
+            )}
           </li>
         ))}
       </ul>
