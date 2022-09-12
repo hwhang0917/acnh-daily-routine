@@ -4,7 +4,8 @@
 
 # Animal Crossing: New Horizon - Daily Routine
 
-[![](https://img.shields.io/badge/Author-hwhang0917-brightgreen)](https://github.com/hwhang0917)
+[![Author](https://img.shields.io/badge/Author-hwhang0917-brightgreen)](https://github.com/hwhang0917)
+[![License](https://img.shields.io/github/license/hwhang0917/acnh-daily-routine)](https://github.com/hwhang0917/acnh-daily-routine/blob/master/LICENSE)
 
 > Animal Crossing background music player, task manager and so on...
 
