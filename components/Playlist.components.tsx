@@ -1,4 +1,5 @@
-import { useState } from "react";
+import Image from "next/image";
+import { useDeferredValue, useEffect, useState } from "react";
 import { IParsedBGM } from "../interfaces/acnhApi.interface";
 
 interface IProps {
@@ -8,8 +9,16 @@ interface IProps {
 export const Playlist = ({ songList }: IProps) => {
   const [expandlist, setExpandlist] = useState<boolean>(false);
   const [query, setQuery] = useState<string>("");
+  const deferredQuery = useDeferredValue(query);
   const [filteredSongList, setFilteredSongList] =
     useState<IParsedBGM[]>(songList);
+
+  useEffect(() => {
+    const newFilteredList = songList.filter((song) =>
+      song.title.toLowerCase().includes(deferredQuery.toLowerCase())
+    );
+    setFilteredSongList(newFilteredList);
+  }, [deferredQuery]);
 
   return (
     <section className="lg:h-fit border border-slate-400 p-5 rounded">
@@ -49,8 +58,14 @@ export const Playlist = ({ songList }: IProps) => {
         {filteredSongList.map((song, idx) => (
           <li
             key={idx}
-            className={`py-2 cursor-pointer dark:hover:text-purple-300 hover:text-purple-500`}
+            className="flex items-center gap-5 py-2 cursor-pointer dark:hover:text-purple-300 hover:text-purple-500"
           >
+            <Image
+              src={song.cover ?? ""}
+              width={50}
+              height={50}
+              alt={"Album cover for " + song.title}
+            />
             <span>{song.title}</span>
           </li>
         ))}

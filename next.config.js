@@ -63,5 +63,8 @@ module.exports = (phase) => {
     },
     reactStrictMode: true,
     swcMinify: true,
+    images: {
+      domains: ["acnhapi.com"],
+    },
   };
 };
