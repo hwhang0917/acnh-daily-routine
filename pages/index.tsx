@@ -9,9 +9,9 @@ interface IProps {
 
 const Home: NextPage<IProps> = ({ bgmList }) => {
   return (
-    <main className="w-full grid grid-cols-4 place-content-center px-5">
-      <Todo />
+    <main className="w-full lg:h-screen lg:grid lg:grid-cols-4 flex flex-col gap-6 px-5">
       <Cover />
+      <Todo />
       <Playlist bgmList={bgmList} />
     </main>
   );
