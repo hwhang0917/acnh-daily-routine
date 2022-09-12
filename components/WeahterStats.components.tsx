@@ -3,6 +3,7 @@ import { EVERY_FIFTHTEEN_MINUTES } from "@constants";
 import { useWeather } from "@hooks";
 import { Spinner } from "@components";
 import { IOpenWeatherResponse } from "../interfaces/openWeather.interface";
+import dayjs from "dayjs";
 
 /**
  * Converts Open Weather Weathercode to Fontawesome weather icon classname
@@ -63,9 +64,11 @@ const getFAWeatherIcon = (weatherCode: number, isNight: boolean): string => {
  */
 const WeatherDetail = ({
   detail,
+  lastUpdated,
   refetch,
 }: {
   detail?: IOpenWeatherResponse;
+  lastUpdated: dayjs.Dayjs;
   refetch: () => void;
 }) => {
   return (
@@ -109,8 +112,15 @@ const WeatherDetail = ({
             <i className="fa-solid fa-percent" />
           </span>
         </li>
+        <li className="flex p-2 justify-between">
+          <span className="flex gap-2">
+            <i className="fa-solid fa-clock" />
+            <span>Last Updated</span>
+          </span>
+          <span className="text-xs">{lastUpdated.format("HH:mm:ss")}</span>
+        </li>
         <li
-          className="flex p-2 justify-between cursor-pointer hover:text-purple-300"
+          className="flex p-2 justify-between cursor-pointer dark:hover:text-purple-300 hover:text-purple-500"
           onClick={refetch}
         >
           <span className="flex gap-2">
@@ -128,12 +138,18 @@ const WeatherDetail = ({
  */
 export const WeatherStats = () => {
   const [detailOpen, setDetailOpen] = useState<boolean>(false);
+  const [lastUpdated, setLastUpdated] = useState(dayjs());
   const { loading, isNight, fetchCurrentWeather, weather } = useWeather();
+
+  const fetchWeatherAndLastUpdated = useCallback(() => {
+    setLastUpdated(dayjs());
+    fetchCurrentWeather();
+  }, [fetchCurrentWeather]);
 
   useEffect(() => {
     // Fetch weather every 15 minutes
     const weatherInterval = setInterval(
-      fetchCurrentWeather,
+      fetchWeatherAndLastUpdated,
       EVERY_FIFTHTEEN_MINUTES
     );
     return () => clearInterval(weatherInterval);
@@ -148,7 +164,7 @@ export const WeatherStats = () => {
   return (
     <span className="relative">
       <span
-        className="cursor-pointer hover:text-violet-300 flex gap-2"
+        className="cursor-pointer dark:hover:text-violet-300 hover:text-violet-500 flex gap-2"
         onClick={toggleDetail}
       >
         <i
@@ -162,7 +178,11 @@ export const WeatherStats = () => {
         />
       </span>
       {detailOpen && (
-        <WeatherDetail detail={weather} refetch={fetchCurrentWeather} />
+        <WeatherDetail
+          detail={weather}
+          refetch={fetchWeatherAndLastUpdated}
+          lastUpdated={lastUpdated}
+        />
       )}
     </span>
   );

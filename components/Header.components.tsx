@@ -14,7 +14,7 @@ export const Header = () => {
         <li className="w-1/2 text-start">
           <DynamicClock />
         </li>
-        <li className="w-1/2 flex justify-end content-center gap-5 select-none">
+        <li className="w-1/2 flex justify-end items-center gap-5 select-none">
           <WeatherStats />
           <i className="fa-solid fa-wifi" />
         </li>
