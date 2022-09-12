@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface ITodoItem {
   task: string;
@@ -16,6 +16,15 @@ export const Todo = () => {
   const [todolist, setTodolist] = useState<ITodoItem[]>([]);
   const [expandTodolist, setExpandTodolist] = useState<boolean>(false);
 
+  const setLocalTodo = useCallback((value: ITodoItem[]) => {
+    if (typeof window !== "undefined")
+      localStorage.setItem("todo", JSON.stringify(value));
+  }, []);
+
+  useEffect(() => {
+    setTodolist(JSON.parse(localStorage.getItem("todo") ?? "[]"));
+  }, []);
+
   return (
     <section className="lg:h-fit border border-slate-400 p-5 rounded col-span-2 order-first lg:order-none">
       <h2 className="text-xl py-3 flex items-end gap-2">
@@ -27,7 +36,9 @@ export const Todo = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          setTodolist((s) => [...s, { done: false, task: todoInput }]);
+          const newTodolist = [...todolist, { done: false, task: todoInput }];
+          setTodolist(newTodolist);
+          setLocalTodo(newTodolist);
           setTodoInput("");
         }}
       >
@@ -75,12 +86,12 @@ export const Todo = () => {
               className="p-5 col-span-5 cursor-pointer flex gap-5 items-center hover:line-through"
               onClick={(e) => {
                 e.preventDefault();
-                setTodolist((s) => {
-                  return s.map(({ done, task }, i) => {
-                    if (i === idx) return { done: !done, task };
-                    return { done, task };
-                  });
+                const newTodolist = todolist.map(({ done, task }, i) => {
+                  if (i === idx) return { done: !done, task };
+                  return { done, task };
                 });
+                setTodolist(newTodolist);
+                setLocalTodo(newTodolist);
               }}
             >
               <span className="w-5">
@@ -94,7 +105,9 @@ export const Todo = () => {
               className="p-5 flex justify-center items-center cursor-pointer dark:hover:text-purple-300 hover:text-violet-500"
               onClick={(e) => {
                 e.preventDefault();
-                setTodolist((s) => s.filter((_, i) => i !== idx));
+                const newTodolist = todolist.filter((_, i) => i !== idx);
+                setTodolist(newTodolist);
+                setLocalTodo(newTodolist);
               }}
             >
               <i className="fa-solid fa-trash" />
