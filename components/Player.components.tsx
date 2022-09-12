@@ -60,7 +60,7 @@ export const Player = ({ currentSong, playing, togglePlay }: IProps) => {
             >
               <i
                 className={`fa-solid ${
-                  mute ? "fa-volume-high" : "fa-volume-xmark"
+                  mute ? "fa-volume-xmark" : "fa-volume-high"
                 }`}
               />
             </div>
